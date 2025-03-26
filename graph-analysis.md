@@ -9,6 +9,15 @@
 6. WFM: Light Green (#d8eae6)
 7. Demand Lead: Light Yellow (#eae6d8)
 8. Default: White (#ffffff)
+## Swimlanes and Color Legend
+1. TA: Light Blue (#d9eaf7)
+2. Subcontractors: Light Purple (#e6d8ea)
+3. IBM WFM: Light Lavender (#e6d8f7)
+4. CIO/RF: Light Cyan (#d9f7ea)
+5. Decision/Approval: Light Pink (#f7d9ea)
+6. WFM: Light Green (#d8eae6)
+7. Demand Lead: Light Yellow (#eae6d8)
+8. Default: White (#ffffff)
 
 ## Mermaid Flowchart
 
@@ -39,6 +48,8 @@ flowchart TB
     classDef demandLeadStyle fill:#eae6d8,stroke:#333,stroke-width:1px,color:black;
     classDef wfmStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
     classDef approvalStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
+    classDef cioStyle fill:#d9f7ea,stroke:#333,stroke-width:1px,color:black;
+    classDef ibmStyle fill:#e6d8f7,stroke:#333,stroke-width:1px,color:black;
     classDef cioStyle fill:#d9f7ea,stroke:#333,stroke-width:1px,color:black;
     classDef ibmStyle fill:#e6d8f7,stroke:#333,stroke-width:1px,color:black;
     classDef subStyle fill:#e6d8ea,stroke:#333,stroke-width:1px,color:black;
