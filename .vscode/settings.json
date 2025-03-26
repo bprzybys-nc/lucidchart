@@ -1,0 +1,11 @@
+{
+    // Enable automatic theme switching based on system preferences
+    "window.autoDetectColorScheme": true,
+    
+    // Use default themes
+    "workbench.preferredLightColorTheme": "Default Light+",
+    "workbench.preferredDarkColorTheme": "Default Dark+",
+    
+    // Set explorer indentation to 12 pixels
+    "workbench.tree.indent": 12
+} 

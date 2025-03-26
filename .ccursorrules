@@ -1,0 +1,69 @@
+# Mermaid Flowchart Style Rules
+
+## Node Styles
+- State boxes: light blue (#d8eae6) with black text
+- Branching boxes (decisions): black background with white text
+- Text wrapping for all nodes to avoid excessive width
+
+## Swimlane Colors
+- Demand Lead: Light Yellow (#eae6d8)
+- WFM: Light Green (#d8eae6)
+- Decision/Approval: Light Pink (#f7d9ea)
+- CIO/RF: Light Blue (#d9eaf7)
+- IBM WFM: Light Purple (#e6d8ea)
+- Subcontractors: Light Purple (#e6d8ea)
+- TA: Light Blue (#d9eaf7)
+- LT: Light Gray (#e6e6e6)
+
+## Arrow Styles
+- Normal transitions: solid black arrows
+- Yes path: solid green arrows with "Yes" label
+- No path: solid red arrows with "No" label
+
+## Global Settings
+- Background: transparent
+- Default stroke: #333, width 1px
+- Text wrapping: Use <br/> for line breaks
+- Avoid special characters in node text
+
+## VSCode Mermaid Plugin Settings
+```json
+{
+  "markdown.extension.mermaid.theme": "default",
+  "markdown.extension.mermaid.config": {
+    "theme": "base",
+    "themeVariables": {
+      "background": "transparent",
+      "primaryColor": "#d8eae6",
+      "primaryTextColor": "black",
+      "primaryBorderColor": "#333",
+      "lineColor": "#333",
+      "secondaryColor": "#f7d9ea",
+      "tertiaryColor": "#eae6d8"
+    }
+  }
+}
+```
+
+## Class Definitions
+```mermaid
+classDef defaultStyle fill:white,stroke:#333,stroke-width:1px;
+classDef startStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
+classDef endStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
+classDef stateStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
+classDef decisionStyle fill:black,stroke:#333,stroke-width:1px,color:white;
+classDef demandLeadStyle fill:#eae6d8,stroke:#333,stroke-width:1px,color:black;
+classDef wfmStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
+classDef approvalStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
+classDef cioStyle fill:#d9eaf7,stroke:#333,stroke-width:1px,color:black;
+classDef ibmStyle fill:#e6d8ea,stroke:#333,stroke-width:1px,color:black;
+classDef subStyle fill:#e6d8ea,stroke:#333,stroke-width:1px,color:black;
+classDef taStyle fill:#d9eaf7,stroke:#333,stroke-width:1px,color:black;
+```
+
+## Usage Notes
+1. Use descriptive node IDs instead of numbers
+2. Add 'Style' suffix to all class names
+3. Use <br/> for line breaks in node text
+4. Group related nodes with comments
+5. Apply styles using class definitions 
