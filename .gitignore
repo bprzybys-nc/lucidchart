@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Test cache
+.pytest_cache/
+.hypothesis/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Cursor specific
+.cursor/
+.cursor/chathistory/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Local development
+*.local
+*.local.*
+.env.local
+.env.*.local 
+chathistory.zip
+
+*test_*/
+*session*.md

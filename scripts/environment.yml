@@ -1,0 +1,15 @@
+name: cursor-logs
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - sqlite
+  - pandas
+  - tqdm
+  - pip:
+    - beautifulsoup4
+    - markdown
+    - lxml
+    - colorama 
