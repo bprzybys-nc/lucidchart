@@ -27,6 +27,10 @@ SAMPLE_LIMIT=0
 MAX_FILES=0
 OUTPUT_DIR="../doc"
 
+# Get script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." &> /dev/null && pwd )"
+
 # Function to check if conda is available
 check_conda() {
     if ! command -v conda &> /dev/null; then

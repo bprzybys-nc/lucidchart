@@ -13,6 +13,10 @@ NC='\033[0m' # No Color
 TEST_MODE="medium"
 OUTPUT_DIR="../doc/test_results"
 
+# Get script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." &> /dev/null && pwd )"
+
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -73,6 +77,69 @@ fi
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
 
+# Create test database
+TEST_DB="$OUTPUT_DIR/test.db"
+echo -e "${BLUE}Creating test database: ${TEST_DB}${NC}"
+
+# Create test database with Python
+cat > "$SCRIPT_DIR/create_test_db.py" << 'EOF'
+#!/usr/bin/env python3
+import sqlite3
+import json
+import sys
+from datetime import datetime, timedelta
+
+def create_test_db(db_path):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # Create table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS cursorDiskKV (
+            key TEXT PRIMARY KEY,
+            value TEXT
+        )
+    ''')
+    
+    # Create test data
+    base_time = datetime.now().timestamp()
+    test_data = []
+    
+    for i in range(10):
+        # User message
+        test_data.append((
+            f'prompt_{i}',
+            json.dumps({
+                'prompt': f'Test user message {i}',
+                'timestamp': base_time + i * 60
+            })
+        ))
+        
+        # Assistant response
+        test_data.append((
+            f'response_{i}',
+            json.dumps({
+                'response': f'Test assistant response {i}',
+                'model': 'test-model',
+                'timestamp': base_time + i * 60 + 30
+            })
+        ))
+    
+    # Insert test data
+    cursor.executemany('INSERT OR REPLACE INTO cursorDiskKV VALUES (?, ?)', test_data)
+    conn.commit()
+    conn.close()
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: create_test_db.py <db_path>")
+        sys.exit(1)
+    create_test_db(sys.argv[1])
+EOF
+
+chmod +x "$SCRIPT_DIR/create_test_db.py"
+PYTHONPATH="$PROJECT_ROOT" python3 "$SCRIPT_DIR/create_test_db.py" "$TEST_DB"
+
 # Run the extraction with parameters
 echo -e "${CYAN}==================================================================${NC}"
 echo -e "${CYAN}         CURSOR CHAT EXTRACTION TEST                              ${NC}"
@@ -83,14 +150,14 @@ echo -e "Sample limit: ${BLUE}$SAMPLE_LIMIT${NC}"
 echo -e "Max files: ${BLUE}$MAX_FILES${NC}"
 
 # Launch the extraction script with the appropriate settings
-./extract_chat_history.sh --sample-limit "$SAMPLE_LIMIT" --max-files "$MAX_FILES" --output-dir "$OUTPUT_DIR"
+"$SCRIPT_DIR/extract_chat_history.sh" --sample-limit "$SAMPLE_LIMIT" --max-files "$MAX_FILES" --output-dir "$OUTPUT_DIR" --db-path "$TEST_DB"
 
 # Check extraction results
 RESULT_FILE="$OUTPUT_DIR/complete_sessions.md"
 if [ -f "$RESULT_FILE" ]; then
   LINE_COUNT=$(wc -l < "$RESULT_FILE")
-  HUMAN_COUNT=$(grep -c "Human (Message" "$RESULT_FILE")
-  LLM_COUNT=$(grep -c "LLM Response" "$RESULT_FILE")
+  HUMAN_COUNT=$(grep -c "### User" "$RESULT_FILE")
+  LLM_COUNT=$(grep -c "### Assistant" "$RESULT_FILE")
   
   echo -e "\n${CYAN}==================================================================${NC}"
   echo -e "${CYAN}         TEST RESULTS                                             ${NC}"

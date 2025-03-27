@@ -58,3 +58,5 @@ chathistory.zip
 
 *test_*/
 *session*.md
+# Keep documentation files
+!scripts/allsessionmd-instruction.md
