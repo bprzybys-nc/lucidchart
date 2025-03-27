@@ -26,7 +26,7 @@
   'theme': 'base',
   'themeVariables': { 
     'background': 'transparent',
-    'primaryColor': '#d8eae6',
+    'primaryColor': '#d9eef7',
     'primaryTextColor': 'black',
     'primaryBorderColor': '#333',
     'lineColor': '#333'
@@ -40,68 +40,56 @@
 
 flowchart TB
     %% Style Definitions
-    classDef defaultStyle fill:white,stroke:#333,stroke-width:1px;
-    classDef startStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
-    classDef endStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
-    classDef stateStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
+    classDef defaultStyle fill:#d9eef7,stroke:#333,stroke-width:1px,color:black;
     classDef decisionStyle fill:black,stroke:#333,stroke-width:1px,color:white;
-    classDef demandLeadStyle fill:#eae6d8,stroke:#333,stroke-width:1px,color:black;
-    classDef wfmStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
-    classDef approvalStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
-    classDef cioStyle fill:#d9f7ea,stroke:#333,stroke-width:1px,color:black;
-    classDef ibmStyle fill:#e6d8f7,stroke:#333,stroke-width:1px,color:black;
-    classDef cioStyle fill:#d9f7ea,stroke:#333,stroke-width:1px,color:black;
-    classDef ibmStyle fill:#e6d8f7,stroke:#333,stroke-width:1px,color:black;
-    classDef subStyle fill:#e6d8ea,stroke:#333,stroke-width:1px,color:black;
-    classDef taStyle fill:#d9eaf7,stroke:#333,stroke-width:1px,color:black;
+    classDef endStyle fill:#d9eef7,stroke:#333,stroke-width:1px,color:black;
 
     %% Initial Process Nodes
-    n1["Demand Plan<br/>1"]
-    n2["Opportunity<br/>Evaluation<br/>2"]
-    n3{"Opportunity<br/>Qualified<br/>(>25%)<br/>3"}
-    n4["Mandatory &<br/>descriptive data<br/>quality check<br/>4"]
-    n5{"Quality<br/>confirmed<br/>5"}
-    n50["RR Role<br/>Clarification<br/>(email/slack)<br/>50"]
-    n501["RR update<br/>501"]
-    n51["Internal Check<br/>51"]
-    nA["NC WFM<br/>Strategy<br/>A"]
-    nB["Opportunity<br/>Closing Stage<br/>B"]
+    n1["Demand Plan<br/>(Project)"]
+    n2["Opportunity<br/>Evaluation<br/>(Project Task)"]
+    n3{"Opportunity<br/>Qualified<br/>(>25%)<br/>(Decision)"}
+    n4["Data Quality<br/>Check<br/>(Task)"]
+    n5{"Quality<br/>confirmed<br/>(Decision)"}
+    n50["Role<br/>Clarification<br/>(Task)"]
+    n501["RR update<br/>(Task)"]
+    n51["Internal Check<br/>(Task)"]
+    nA["WFM Strategy<br/>(Reference)"]
 
     %% Expert Finding Nodes
-    n52{"Expert(s)<br/>Found<br/>52"}
-    n520["Expert(s)<br/>Proposed<br/>520"]
-    n521["Gap Analysis<br/>521"]
-    n522["Staffing<br/>Recommendations<br/>522"]
-    n523{"Staffing<br/>Recommendation<br/>Acceptance<br/>523"}
-    n5230{"Internal<br/>Expert(s)<br/>5230"}
-    n5231["Inform TA<br/>5231"]
-    n5232{"Global Head of<br/>WFM approval<br/>5232"}
-    n52320["Job description<br/>52320"]
-    n52321["CIO/RF<br/>52321"]
-    n52322{"Approved<br/>52322"}
+    n52{"Experts<br/>Found<br/>(Decision)"}
+    n520["Experts<br/>Proposed<br/>(Task)"]
+    n521["Gap Analysis<br/>(Task)"]
+    n522["Staffing<br/>Recommendations<br/>(Task)"]
+    n523{"Recommendation<br/>Acceptance<br/>(Approval)"}
+    n5230{"Internal<br/>Experts<br/>(Decision)"}
+    n5231["Inform TA<br/>(Notification)"]
+    n5232{"WFM Approval<br/>(Approval)"}
+    n52320["Job<br/>Description<br/>(Document)"]
+    n52321["CIO/RF<br/>Review<br/>(Task)"]
+    n52322{"Approved<br/>(Approval)"}
 
     %% Final Process Nodes
-    n52323["Internal<br/>promotion<br/>52323"]
-    n52324["TA<br/>52324"]
-    n523220["Experts<br/>Softbooked<br/>523220"]
-    n523221["IBM WFM<br/>523221"]
-    n523222{"Approved<br/>523222"}
-    n523223["Assignment<br/>523223"]
-    n52322210["NC hiring<br/>approval flow<br/>52322210"]
-    n5232221{"Approved<br/>5232221"}
-    stop(( ))
+    n52323["Internal<br/>Promotion<br/>(Task)"]
+    n52324["TA Process<br/>(Task)"]
+    n523220["Experts<br/>Softbooked<br/>(Resources)"]
+    n523221["External<br/>WFM<br/>(Task)"]
+    n523222{"Approved<br/>(Approval)"}
+    n5232220["Subcontractors<br/>(Resources)"]
+    n523223["Assignment<br/>(Resource<br/>Assignment)"]
+    n52322210["Hiring<br/>Approval<br/>(Approval)"]
+    n5232221{"Final<br/>Approval<br/>(Approval)"}
+    stop["Project<br/>Complete"]
 
     %% Initial Flow Connections
     n1 --> n2
     n2 --> n3
     n3 -->|No| n1
     n3 -->|Yes| n4
-    n4 --> n50
+    n4 --> n5
+    n5 -->|No| n50
     n50 --> n501
     n501 --> n4
-    n4 --> n5
     n5 -->|Yes| n51
-    n5 -->|No| n50
     nA -.-> n51
 
     %% Expert Finding Flow
@@ -132,32 +120,18 @@ flowchart TB
     n52322 -->|No| n523221
     n523221 --> n523222
     n523222 -->|Yes| n523220
-    n523222 -->|No| n52322210
-    n52322210 --> n52324
+    n523222 -->|No| n5232220
+    n5232220 --> n5232221
     n5232221 -->|Yes| n523220
     n5232221 -->|No| n52322210
+    n52322210 --> n52324
     nB -.-> n523223
 
     %% Apply Styles
-    class n1,n50,n501 demandLeadStyle;
-    class n2,n4,n51,n520,n521,n522,n5231,n52320,n523223 wfmStyle;
-    class n52321 cioStyle;
-    class n52323,n52324 taStyle;
-    class n523220 subStyle;
-    class n523221 ibmStyle;
+    class n1,n2,n4,n50,n501,n51,n520,n521,n522,n5231,n52320,n52323,n52324,n523220,n523221,n523223,n52322210,nA,stop defaultStyle;
     class n3,n5,n52,n523,n5230,n5232,n52322,n523222,n5232221 decisionStyle;
-    class n52322210 approvalStyle;
-    class stop endStyle;
-    class nA,nB defaultStyle;
-
-    %% Layout Hints
-    n1 ~~~ n2 ~~~ n3
-    n50 ~~~ n501 ~~~ n4
-    n520 ~~~ n521 ~~~ n522
-    n52323 ~~~ n52324 ~~~ n523220
-    n523221 ~~~ n523222 ~~~ n523223
-    n52320 ~~~ n52321 ~~~ n52322
-    n5230 ~~~ n5231 ~~~ n5232
+    class n52321 defaultStyle;
+    class n5232220 defaultStyle;
 ```
 
 ## Node Details
@@ -406,6 +380,15 @@ Output Branches: [(523220, "Yes"), (52322210, "No")]
 ```
 
 ```yaml
+Node ID: 5232220
+Text: Subcontractors
+Swimlane: Subcontractors
+Type: state
+Input Branches: [(523222, "No")]
+Output Branches: [(5232221, "")]
+```
+
+```yaml
 Node ID: A
 Text: NC WFM Strategy
 Swimlane: Default
@@ -500,6 +483,7 @@ flowchart TB
     n523220["Experts<br/>Softbooked<br/>(Resources)"]
     n523221["External<br/>WFM<br/>(Task)"]
     n523222{"Approved<br/>(Approval)"}
+    n5232220["Subcontractors<br/>(Resources)"]
     n523223["Assignment<br/>(Resource<br/>Assignment)"]
     n52322210["Hiring<br/>Approval<br/>(Approval)"]
     n5232221{"Final<br/>Approval<br/>(Approval)"}
@@ -545,15 +529,18 @@ flowchart TB
     n52322 -->|No| n523221
     n523221 --> n523222
     n523222 -->|Yes| n523220
-    n523222 -->|No| n52322210
-    n52322210 --> n52324
+    n523222 -->|No| n5232220
+    n5232220 --> n5232221
     n5232221 -->|Yes| n523220
     n5232221 -->|No| n52322210
+    n52322210 --> n52324
+    nB -.-> n523223
 
     %% Apply Styles
     class n1,n2,n4,n50,n501,n51,n520,n521,n522,n5231,n52320,n52323,n52324,n523220,n523221,n523223,n52322210,nA,stop defaultStyle;
     class n3,n5,n52,n523,n5230,n5232,n52322,n523222,n5232221 decisionStyle;
     class n52321 defaultStyle;
+    class n5232220 defaultStyle;
 ```
 
 ### Optimized Implementation

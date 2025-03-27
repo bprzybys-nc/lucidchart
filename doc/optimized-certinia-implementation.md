@@ -40,6 +40,7 @@ The optimized Certinia workflow simplifies resource management through automatio
 
 5. **Getting to Work**
    - After approval, Certinia automatically handles resource assignment.
+   - The system also manages subcontractor resources through an automated assignment process.
    - A final, streamlined approval confirms everything is ready.
    - The system then automatically configures the project.
    - Your team can start working immediately once the project is complete.
@@ -92,6 +93,7 @@ flowchart TB
 
     %% Final Process - Simplified
     n5230["Resource<br/>Assignment<br/>(Auto-Generated)"]
+    n5232220["Subcontractors<br/>(Auto-Assigned)"]
     n5231{"Final<br/>Approval<br/>(Single Stage)"}
     n5232["Project<br/>Setup<br/>(Automated)"]
     stop["Project<br/>Complete"]
@@ -116,12 +118,13 @@ flowchart TB
     %% Simplified Approval and Assignment
     n523 -->|Yes| n5230
     n523 -->|No| n51
-    n5230 --> n5231
+    n5230 --> n5232220
+    n5232220 --> n5231
     n5231 -->|Yes| n5232
     n5231 -->|No| n51
     n5232 --> stop
 
     %% Apply Styles
-    class n1,n2,n4,n51,n520,n521,n522,n5230,n5232,stop defaultStyle;
+    class n1,n2,n4,n51,n520,n521,n522,n5230,n5232220,n5232,stop defaultStyle;
     class n3,n5,n52,n523,n5231 decisionStyle;
-``` 
+```
