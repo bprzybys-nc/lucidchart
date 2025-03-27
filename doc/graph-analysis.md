@@ -26,7 +26,7 @@
   'theme': 'base',
   'themeVariables': { 
     'background': 'transparent',
-    'primaryColor': '#d9eef7',
+    'primaryColor': '#d8eae6',
     'primaryTextColor': 'black',
     'primaryBorderColor': '#333',
     'lineColor': '#333'
@@ -40,9 +40,18 @@
 
 flowchart TB
     %% Style Definitions
-    classDef defaultStyle fill:#d9eef7,stroke:#333,stroke-width:1px,color:black;
+    classDef defaultStyle fill:white,stroke:#333,stroke-width:1px;
+    classDef startStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
+    classDef endStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
+    classDef stateStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
     classDef decisionStyle fill:black,stroke:#333,stroke-width:1px,color:white;
-    classDef endStyle fill:#d9eef7,stroke:#333,stroke-width:1px,color:black;
+    classDef demandLeadStyle fill:#eae6d8,stroke:#333,stroke-width:1px,color:black;
+    classDef wfmStyle fill:#d8eae6,stroke:#333,stroke-width:1px,color:black;
+    classDef approvalStyle fill:#f7d9ea,stroke:#333,stroke-width:1px,color:black;
+    classDef cioStyle fill:#d9f7ea,stroke:#333,stroke-width:1px,color:black;
+    classDef ibmStyle fill:#e6d8f7,stroke:#333,stroke-width:1px,color:black;
+    classDef subStyle fill:#e6d8ea,stroke:#333,stroke-width:1px,color:black;
+    classDef taStyle fill:#d9eaf7,stroke:#333,stroke-width:1px,color:black;
 
     %% Initial Process Nodes
     n1["Demand Plan<br/>(Project)"]
@@ -128,10 +137,16 @@ flowchart TB
     nB -.-> n523223
 
     %% Apply Styles
-    class n1,n2,n4,n50,n501,n51,n520,n521,n522,n5231,n52320,n52323,n52324,n523220,n523221,n523223,n52322210,nA,stop defaultStyle;
+    class n1,n50,n501 demandLeadStyle;
+    class n2,n4,n51,n520,n521,n522,n5231,n52320,n523223 wfmStyle;
+    class n52321 cioStyle;
+    class n52323,n52324 taStyle;
+    class n523220,n5232220 subStyle;
+    class n523221 ibmStyle;
     class n3,n5,n52,n523,n5230,n5232,n52322,n523222,n5232221 decisionStyle;
-    class n52321 defaultStyle;
-    class n5232220 defaultStyle;
+    class n52322210 approvalStyle;
+    class stop endStyle;
+    class nA,nB defaultStyle;
 ```
 
 ## Node Details

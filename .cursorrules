@@ -67,3 +67,11 @@ classDef taStyle fill:#d9eaf7,stroke:#333,stroke-width:1px,color:black;
 3. Use <br/> for line breaks in node text
 4. Group related nodes with comments
 5. Apply styles using class definitions 
+
+## Edit Instructions
+1. ONLY modify the specific content that is explicitly requested
+2. Do not change formatting, style, or content of unrelated sections
+3. When editing diagrams, preserve existing node IDs, connections, and layout
+4. For flowcharts, maintain the existing visual style and color scheme unless specifically asked to change it
+5. When adding new elements, follow the existing naming and styling conventions
+6. Respect file structure - don't change indentation, line breaks or other formatting unless requested 
