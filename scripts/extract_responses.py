@@ -17,12 +17,34 @@ from tqdm import tqdm
 import sys
 import colorama
 from typing import List, Dict, Optional, Any
-from scripts.cursor_locations import (
-    get_cursor_paths,
-    find_workspace_db,
-    validate_paths,
-    get_workspace_info
-)
+
+# Try to import cursor_locations from different locations depending on how the script is run
+try:
+    # When imported as a module
+    from scripts.cursor_locations import (
+        get_cursor_paths,
+        find_workspace_db,
+        validate_paths,
+        get_workspace_info
+    )
+except ImportError:
+    # When run directly from scripts directory
+    try:
+        from cursor_locations import (
+            get_cursor_paths,
+            find_workspace_db,
+            validate_paths,
+            get_workspace_info
+        )
+    except ImportError:
+        # If still not found, try adding parent directory to path
+        sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        from scripts.cursor_locations import (
+            get_cursor_paths,
+            find_workspace_db,
+            validate_paths,
+            get_workspace_info
+        )
 
 # Initialize colorama for cross-platform colored output
 colorama.init()
