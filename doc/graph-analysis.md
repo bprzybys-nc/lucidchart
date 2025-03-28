@@ -63,6 +63,7 @@ flowchart TB
     n501["RR update<br/>(Task)"]
     n51["Internal Check<br/>(Task)"]
     nA["WFM Strategy<br/>(Reference)"]
+    nB["Opportunity<br/>'ClosingStage'"]
 
     %% Expert Finding Nodes
     n52{"Experts<br/>Found<br/>(Decision)"}
